@@ -6,3 +6,9 @@ export function receiveUsers (users) {
     users,
   }
 }
+
+// export function getUsers() {
+//   return async dispatch => {
+//     dispatch(receiveUsers(users));
+//   };
+// }

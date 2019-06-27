@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 
-import SignIn from './SignIn'
+import Nav from './Nav'
+import HomePage from './HomePage'
 
 class App extends Component {
   componentDidMount () {
@@ -15,7 +16,12 @@ class App extends Component {
     return (
       <Router>
           <div className='container'>
-            <Route path='/' exact component={SignIn} />
+            <Nav />
+            <Route path='/' exact component={HomePage} />
+            {/* {this.props.authedUser ? 
+              <Route path='/' exact component={SignIn} />
+            : <Route path='/' exact component={QuestionView} />
+            } */}
           </div>
       </Router>
     )
@@ -23,7 +29,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return { users: state.users }
+  console.log(state)
+  return { 
+    authedUser: state.authedUser 
+  }
 }
 
 export default connect(mapStateToProps)(App)

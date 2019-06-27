@@ -3,18 +3,17 @@ import { connect } from 'react-redux'
 
 
 class SignIn extends Component {
-  componentDidMount () {
-    // console.log(this.props)
-  }
-
   render() {
-    console.log(this.props)
+    let users;
+
+    if (this.props.users){
+      users = Object.keys(this.props.users);
+    }
     return (
       <div>
         <select>
-          {this.props.users && this.props.users.length ? 
-            this.props.users.map(user => <option>user</option>)
-          : null}
+          <option>select a user</option>
+          {/* {users.map(user => <option key={user}>{user}</option>)} */}
         </select>
       </div>
     )
@@ -22,7 +21,6 @@ class SignIn extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return { 
     users: state.users
   }
