@@ -8,9 +8,7 @@ export default function questions (state = {}, action) {
         ...action.questions
       }
     default :
-      return {
-        state
-      }
+      return state
   }
 
 }

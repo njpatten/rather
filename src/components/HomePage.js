@@ -2,26 +2,34 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Question from './Question'
-
-let questions;
+import authedUser from '../reducers/authedUser';
 
 class Homepage extends Component {
+  state = {
+    answered: false
+  }
 
   render() {
     let questionObj = this.props.questions;
+    let questions = Object.keys(questionObj).map(key => questionObj[key])
 
-    if (questionObj){
-      // questions = Object.keys(questionObj.state).map(key => questionObj.state[key])
-    }
+    console.log(questions)
+
     return (
-      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '500px'}}>
-        {questions.map((question, i) => 
-          <Question
-            author={question.author}
-            optionOne={question.optionOne}
-            optionTwo={question.optionTwo}
-          />
-        )}
+      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+        <div>
+          <button onClick={this.changeAnsweredTab}>Unanswered</button>
+          <button onClick={this.changeAnsweredTab}>Answered</button>
+        </div>
+        {questions.filter(question => question.author === 'sarahedo').map(question => {
+          return (
+            <Question
+              author={question.author}
+              optionOne={question.optionOne}
+              optionTwo={question.optionTwo}
+            />
+          )
+        })}
       </div>
     )
   }
@@ -30,7 +38,8 @@ class Homepage extends Component {
 function mapStateToProps(state) {
   return { 
     users: state.users,
-    questions: state.questions
+    questions: state.questions,
+    authedUser: state.authedUser
   }
 }
 

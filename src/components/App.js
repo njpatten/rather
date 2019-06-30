@@ -5,11 +5,12 @@ import { handleInitialData } from '../actions/shared'
 
 import Nav from './Nav'
 import HomePage from './HomePage'
+import SignIn from './SignIn'
 
 class App extends Component {
   componentDidMount () {
     this.props.dispatch(handleInitialData())
-    console.log(this.props)
+    // console.log(this.props)
   }
 
   render() {
@@ -17,11 +18,11 @@ class App extends Component {
       <Router>
           <div className='container'>
             <Nav />
-            <Route path='/' exact component={HomePage} />
-            {/* {this.props.authedUser ? 
-              <Route path='/' exact component={SignIn} />
-            : <Route path='/' exact component={QuestionView} />
-            } */}
+            {/* <Route path='/' exact component={HomePage} /> */}
+            {this.props.authedUser ? 
+              <Route path='/' exact component={HomePage} />
+            : <Route path='/' exact component={SignIn} />
+            }
           </div>
       </Router>
     )

@@ -20,11 +20,11 @@ class Question extends Component {
               <form onSubmit={() => console.log('fml')}>
                 <div style={{display: 'flex'}}>
                   <input type="radio" id="option1" />
-                  {/* <label>{optionOne.text}</label> */}
+                  <label>{optionOne.text}</label>
                 </div>
                 <div style={{display: 'flex'}}>
                   <input type="radio" id="option1" />
-                  {/* <label>{optionTwo.text}</label> */}
+                  <label>{optionTwo.text}</label>
                 </div>
                 <button>Submit</button>
               </form>

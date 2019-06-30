@@ -6,3 +6,9 @@ export function receiveQuestions (questions) {
     questions,
   }
 }
+
+// export function getQuestions(questions) {
+//   return async dispatch => {
+//     dispatch(receiveQuestions(questions));
+//   };
+// }
