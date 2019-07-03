@@ -6,14 +6,42 @@ import authedUser from '../reducers/authedUser';
 
 class Homepage extends Component {
   state = {
-    answered: false
+    answered: true,
   }
 
-  render() {
+  getShownQuestions = () => {
     let questionObj = this.props.questions;
     let questions = Object.keys(questionObj).map(key => questionObj[key])
 
-    console.log(questions)
+    let shownQuestions = [];
+
+    if (this.state.answered) {
+      questions.forEach(question => {
+        if (question.optionOne.votes.includes(this.props.authedUser) || question.optionTwo.votes.includes(this.props.authedUser)){
+          shownQuestions.push(question);
+        }
+      })
+    } else {
+      questions.forEach(question => {
+        if (!question.optionOne.votes.includes(this.props.authedUser) && !question.optionTwo.votes.includes(this.props.authedUser)){
+          shownQuestions.push(question);
+        }
+      })
+    }
+    return shownQuestions;
+  }
+
+  changeAnsweredTab = () => {
+    this.setState({
+      answered: !this.state.answered,
+    })
+  }
+
+  componentDidMount = () => {
+    console.log(this.props)
+  }
+
+  render() {
 
     return (
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
@@ -21,12 +49,14 @@ class Homepage extends Component {
           <button onClick={this.changeAnsweredTab}>Unanswered</button>
           <button onClick={this.changeAnsweredTab}>Answered</button>
         </div>
-        {questions.filter(question => question.author === 'sarahedo').map(question => {
+        {this.getShownQuestions().map(question => {
           return (
             <Question
               author={question.author}
               optionOne={question.optionOne}
               optionTwo={question.optionTwo}
+              key={question.id}
+              id={question.id}
             />
           )
         })}

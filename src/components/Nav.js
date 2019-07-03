@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 
 class Nav extends Component {
   render() {
     return (
       <div>
-        <ul>
-          <li>
-            Home
-          </li>
-          <li>
-            New Question
-          </li>
-          <li>
-            Leaderboard
-          </li>
+        <ul className="main-nav">
+          <Link to='/'>
+            <li key='home'>
+              Home
+            </li>
+          </Link>
+          <Link to='/new-question'>
+            <li key='new'>
+              New Question
+            </li>
+          </Link>
+          <Link to='/leaderboard'>
+            <li key='leaderboard'>
+              Leaderboard
+            </li>
+          </Link>
         </ul>
       </div>
     )
