@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Question from './Question'
-import authedUser from '../reducers/authedUser';
-
 class Leaderboard extends Component {
   state={
     loading: true
@@ -58,7 +55,6 @@ function mapStateToProps(state) {
   return { 
     users: state.users,
     questions: state.questions,
-    authedUser: state.authedUser
   }
 }
 

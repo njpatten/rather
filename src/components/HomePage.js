@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Question from './Question'
-import { _getQuestions } from '../utils/_DATA.js'
-import authedUser from '../reducers/authedUser';
 import { handleInitialData } from '../actions/shared'
 
 class Homepage extends Component {

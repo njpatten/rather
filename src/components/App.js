@@ -43,7 +43,6 @@ class App extends Component {
                 <NavSecondary />
               </div>
           }
-            {/* <Route path='/' exact component={HomePage} /> */}
             {this.props.authedUser ? 
               <Route path='/' exact component={HomePage} />
             : <Route path='/' exact component={SignIn} />
