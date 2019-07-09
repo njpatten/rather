@@ -20,6 +20,8 @@ class App extends Component {
   }
 
   componentDidMount () {
+
+    
     this.props.dispatch(handleInitialData())
 
     window.logout = () => this.props.dispatch(setAuthedUser(null))
@@ -35,17 +37,19 @@ class App extends Component {
     return (
       <Router>
           <div className='container'>
-            <div className="nav">
-              <Nav />
-              <NavSecondary />
-            </div>
+          {this.props.authedUser && 
+              <div className="nav">
+                <Nav />
+                <NavSecondary />
+              </div>
+          }
             {/* <Route path='/' exact component={HomePage} /> */}
             {this.props.authedUser ? 
               <Route path='/' exact component={HomePage} />
             : <Route path='/' exact component={SignIn} />
             }
             <Route path='/questions/:question_id' component={Questions} />
-            <Route path='/new-question' component={NewQuestion} />
+            <Route path='/add' component={NewQuestion} />
             <Route path='/leaderboard' component={Leaderboard} />
           </div>
       </Router>

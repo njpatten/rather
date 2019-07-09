@@ -10,7 +10,7 @@ class Nav extends Component {
             Home
           </li>
         </Link>
-        <Link to='/new-question'>
+        <Link to='/add'>
           <li key='new'>
             New Question
           </li>

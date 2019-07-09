@@ -13,8 +13,8 @@ class Homepage extends Component {
 
   componentDidMount = () => {
     this.props.dispatch(handleInitialData())
+    console.log(this.props)
   }
-
 
   getShownQuestions = () => {
     let questionObj = this.props.questions;
@@ -49,8 +49,8 @@ class Homepage extends Component {
     return (
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <div>
-          <button onClick={this.changeAnsweredTab} className={!this.state.answered && 'solid'}>Unanswered</button>
-          <button onClick={this.changeAnsweredTab} className={this.state.answered && 'solid'}>Answered</button>
+          <button onClick={this.changeAnsweredTab} className={!this.state.answered ? 'solid' : null}>Unanswered</button>
+          <button onClick={this.changeAnsweredTab} className={this.state.answered ? 'solid' : null}>Answered</button>
         </div>
         {this.getShownQuestions().map(question => {
           return (
