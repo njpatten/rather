@@ -9,10 +9,18 @@ export function getInitialData () {
     questions,
   }))
 }
-export function saveQuestionAnswer (info) {
-  return _saveQuestionAnswer(info)
-}
 
-export function saveQuestion (info) {
-  return _saveQuestion(info)
-}
+// export function getQuestions () {
+//   return _getQuestions().then(questions => {
+//     console.log(questions)
+//     return questions
+//   })
+// }
+
+// export function saveQuestionAnswer (info) {
+//   return _saveQuestionAnswer(info)
+// }
+
+// export function saveQuestion (info) {
+//   return _saveQuestion(info)
+// }

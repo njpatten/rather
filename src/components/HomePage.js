@@ -2,12 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Question from './Question'
+import { _getQuestions } from '../utils/_DATA.js'
 import authedUser from '../reducers/authedUser';
+import { handleInitialData } from '../actions/shared'
 
 class Homepage extends Component {
   state = {
-    answered: true,
+    answered: false,
   }
+
+  componentDidMount = () => {
+    this.props.dispatch(handleInitialData())
+  }
+
 
   getShownQuestions = () => {
     let questionObj = this.props.questions;
@@ -37,17 +44,13 @@ class Homepage extends Component {
     })
   }
 
-  componentDidMount = () => {
-    console.log(this.props)
-  }
-
   render() {
 
     return (
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <div>
-          <button onClick={this.changeAnsweredTab}>Unanswered</button>
-          <button onClick={this.changeAnsweredTab}>Answered</button>
+          <button onClick={this.changeAnsweredTab} className={!this.state.answered && 'solid'}>Unanswered</button>
+          <button onClick={this.changeAnsweredTab} className={this.state.answered && 'solid'}>Answered</button>
         </div>
         {this.getShownQuestions().map(question => {
           return (
@@ -57,6 +60,7 @@ class Homepage extends Component {
               optionTwo={question.optionTwo}
               key={question.id}
               id={question.id}
+              showResults={this.state.answered}
             />
           )
         })}

@@ -3,19 +3,49 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class Question extends Component {
+  state= {
+    selectedAnswer: null,
+    selectedAnswerText: '',
+  }
 
   componentDidMount = () => {
-    console.log(this.props)
+    // console.log(this.props)
+    if (this.props.showResults){
+      console.log(this.props.authedUser)
+      if (this.props.optionOne.votes.includes(this.props.authedUser)){
+        this.setState({
+          selectedAnswer: 'optionOne',
+          selectedAnswerText: this.props.optionOne.text
+        })
+      }
+      else if (this.props.optionTwo.votes.includes(this.props.authedUser)){
+        this.setState({
+          selectedAnswer: 'optionTwo',
+          selectedAnswerText: this.props.optionTwo.text
+        })
+      }
+    }
+  }
+
+  handleChange = event => {
+    let question = this.props.questions[this.props.id]
+    let questionText = question[event.target.value].text
+    console.log(this.props.id)
+    this.setState({
+      selectedAnswer: event.target.value,
+      selectedAnswerText: questionText,
+    })
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onAnswer();
+    if (this.state.selectedAnswer != null){
+      this.props.onAnswer(this.state.selectedAnswer);
+    }
   }
 
   render() {
     const { author, optionOne, optionTwo, id, showValues, showResults } = this.props
-    console.log(this.props)
 
     return (
       <div style={{width: '500px'}}>
@@ -29,17 +59,21 @@ class Question extends Component {
             {showValues ?
               <form onSubmit={this.handleSubmit}>
                 <div style={{display: 'flex'}}>
-                  <input type="radio" id="option1" />
+                  <input type="radio" id="optionOne" value="optionOne" onChange={this.handleChange} />
                   <label> {optionOne.text}</label>
                 </div>
                 <div style={{display: 'flex'}}>
-                  <input type="radio" id="option1" />
+                  <input type="radio" id="optionTwo" value="optionTwo" onChange={this.handleChange}/>
                   <label> {optionTwo.text}</label>
                 </div>
                 <button>Submit</button>
               </form>
-            : showResults ? 
-            <div>show results</div>
+            : showResults ?
+            <div>
+              <p>{optionOne.text} has {optionOne.votes.length} votes</p>
+              <p>{optionTwo.text} has {optionTwo.votes.length} votes</p>
+              <p>Your answer: {this.state.selectedAnswerText}</p>
+            </div>
             : <div>
               <p>{optionOne.text} or...</p> 
               <Link to={`/questions/${id}`}>
@@ -56,6 +90,8 @@ class Question extends Component {
 function mapStateToProps(state) {
   return { 
     users: state.users,
+    authedUser: state.authedUser,
+    questions: state.questions,
   }
 }
 

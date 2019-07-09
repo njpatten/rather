@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { _saveQuestionAnswer, _getQuestions } from '../utils/_DATA.js'
 
 import Question from './Question'
 
@@ -9,7 +10,16 @@ class Questions extends Component {
     showResults: false,
   }
 
-  handleAnswer = () => {
+  handleAnswer = (qid, answer) => {
+    const { authedUser } = this.props;
+
+    _saveQuestionAnswer({ authedUser, qid, answer })
+      .then(() => {
+        _getQuestions().then(questions => console.log(questions))
+      })
+      .catch(() => console.log('unsuccessful save question'))
+
+
     this.setState({
       showValues: false,
       showResults: true,
@@ -28,9 +38,10 @@ class Questions extends Component {
             optionOne={question.optionOne}
             optionTwo={question.optionTwo}
             key={question.id}
+            id={question.id}
             showValues={this.state.showValues}
             showResults={this.state.showResults}
-            onAnswer={this.handleAnswer}
+            onAnswer={(answer) => this.handleAnswer(question.id, answer)}
           />
         : null}
       </div>
@@ -40,7 +51,7 @@ class Questions extends Component {
 
 function mapStateToProps(state) {
   return { 
-    users: state.users,
+    authedUser: state.authedUser,
     questions: state.questions,
   }
 }

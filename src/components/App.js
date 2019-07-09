@@ -9,6 +9,7 @@ import SignIn from './SignIn'
 import Questions from './Questions'
 import NewQuestion from './NewQuestion';
 import Leaderboard from './Leaderboard';
+import NavSecondary from './NavSecondary';
 
 import { setAuthedUser } from '../actions/authedUser'
 
@@ -26,6 +27,8 @@ class App extends Component {
     if(loggedInUser) {
       this.props.dispatch(setAuthedUser(loggedInUser))
     }
+
+    
   }
 
   render() {
@@ -34,6 +37,7 @@ class App extends Component {
           <div className='container'>
             <div className="nav">
               <Nav />
+              <NavSecondary />
             </div>
             {/* <Route path='/' exact component={HomePage} /> */}
             {this.props.authedUser ? 
