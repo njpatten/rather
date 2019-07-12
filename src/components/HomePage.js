@@ -26,12 +26,14 @@ class Homepage extends Component {
           shownQuestions.push(question);
         }
       })
+      shownQuestions.sort((a,b) => b.timestamp - a.timestamp)
     } else {
       questions.forEach(question => {
         if (!question.optionOne.votes.includes(this.props.authedUser) && !question.optionTwo.votes.includes(this.props.authedUser)){
           shownQuestions.push(question);
         }
       })
+      shownQuestions.sort((a,b) => b.timestamp - a.timestamp)
     }
     return shownQuestions;
   }

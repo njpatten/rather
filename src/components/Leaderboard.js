@@ -10,17 +10,13 @@ class Leaderboard extends Component {
     let totalAnswered = 0;
     let questionObj = this.props.questions;
     let questions = Object.keys(questionObj).map(key => questionObj[key])
-    console.log(questions)
     questions.map(question => {
       if (question.optionOne.votes.includes(user)){
         totalAnswered = totalAnswered + 1
-        console.log('yes')
       }
       if (question.optionTwo.votes.includes(user)){
         totalAnswered = totalAnswered + 1
-        console.log('ok')
       }
-      console.log(totalAnswered)
       return totalAnswered
     })
     return totalAnswered
