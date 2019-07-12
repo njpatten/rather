@@ -35,12 +35,12 @@ class NewQuestion extends Component {
         <h1>New Question</h1>
         <h2>Would you rather...</h2>
         <form onSubmit={this.createQuestion}>
-          <div class="form-wrap">
-            <label for="optionOne">Option One</label>
+          <div className="form-wrap">
+            <label htmlFor="optionOne">Option One</label>
             <input id="optionOne" name="optionOne" type="text" value={this.state.optionOne} onChange={this.handleChange}></input>
           </div>
-          <div class="form-wrap">
-            <label for="optionTwo">Option Two</label>
+          <div className="form-wrap">
+            <label htmlFor="optionTwo">Option Two</label>
             <input id="optionTwo" name="optionTwo" type="text" value={this.state.optionTwo} onChange={this.handleChange}></input>
           </div>
           <div class="form-wrap">

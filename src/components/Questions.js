@@ -13,6 +13,7 @@ class Questions extends Component {
   handleAnswer = (qid, answer) => {
     const { authedUser } = this.props;
 
+    // update redux store
     _saveQuestionAnswer({ authedUser, qid, answer })
       .then(() => {
         _getQuestions().then(questions => console.log(questions))
@@ -43,7 +44,7 @@ class Questions extends Component {
             showResults={this.state.showResults}
             onAnswer={(answer) => this.handleAnswer(question.id, answer)}
           />
-        : null}
+        : <h2>Oops! No question here!</h2>}
       </div>
     )
   }

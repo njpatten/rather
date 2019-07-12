@@ -38,13 +38,15 @@ class Question extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.selectedAnswer != null){
-      this.props.onAnswer(this.state.selectedAnswer);
+      let selectedAnswer = this.state.selectedAnswer
+      this.props.onAnswer(selectedAnswer);
+      this.props[selectedAnswer].votes.push(this.props.authedUser)
     }
   }
 
   getPercent = optionVotes => {
     const totalVotes = this.props.optionTwo.votes.length + this.props.optionOne.votes.length;
-    return optionVotes/totalVotes * 100
+    return Math.round(optionVotes/totalVotes * 100)
   }
 
   render() {
@@ -63,11 +65,11 @@ class Question extends Component {
               <form onSubmit={this.handleSubmit}>
                 <div style={{display: 'flex'}}>
                   <input type="radio" id="optionOne" value="optionOne" name="question" onChange={this.handleChange} />
-                  <label for="optionOne">{optionOne.text}</label>
+                  <label htmlFor="optionOne">{optionOne.text}</label>
                 </div>
                 <div style={{display: 'flex'}}>
                   <input type="radio" id="optionTwo" value="optionTwo" name="question" onChange={this.handleChange}/>
-                  <label for="optionTwo">{optionTwo.text}</label>
+                  <label htmlFor="optionTwo">{optionTwo.text}</label>
                 </div>
                 <button>Submit</button>
               </form>

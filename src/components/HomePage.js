@@ -52,7 +52,9 @@ class Homepage extends Component {
           <button onClick={this.changeAnsweredTab} className={!this.state.answered ? 'solid' : null}>Unanswered</button>
           <button onClick={this.changeAnsweredTab} className={this.state.answered ? 'solid' : null}>Answered</button>
         </div>
-        {this.getShownQuestions().map(question => {
+        {!this.getShownQuestions().length ? 
+          'No questions to answer. Go ask something!'
+        : this.getShownQuestions().map(question => {
           return (
             <Question
               author={question.author}
