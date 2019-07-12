@@ -8,6 +8,7 @@ class NavSecondary extends Component {
   
   logOut = () => {
     this.props.dispatch(setAuthedUser(null))
+    localStorage.removeItem('loggedInUser');
   }
 
   render() {
@@ -20,7 +21,7 @@ class NavSecondary extends Component {
           <ul className="nav-secondary">
             <li><img src={authedUserObj.avatarURL} className="nav-avatar"/></li>
             <li>Logged in as {authedUser}</li>
-            <li onClick={this.logOut}>Log Out</li>
+            <li style={{cursor: 'pointer'}} onClick={this.logOut}>Log Out</li>
           </ul>
         : null}
     </div>

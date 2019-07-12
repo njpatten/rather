@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 
@@ -10,6 +10,7 @@ import Questions from './Questions'
 import NewQuestion from './NewQuestion';
 import Leaderboard from './Leaderboard';
 import NavSecondary from './NavSecondary';
+import NoMatch from './NoMatch';
 
 import { setAuthedUser } from '../actions/authedUser'
 
@@ -20,8 +21,6 @@ class App extends Component {
   }
 
   componentDidMount () {
-
-    
     this.props.dispatch(handleInitialData())
 
     window.logout = () => this.props.dispatch(setAuthedUser(null))
@@ -29,7 +28,6 @@ class App extends Component {
     if(loggedInUser) {
       this.props.dispatch(setAuthedUser(loggedInUser))
     }
-
     
   }
 
@@ -43,13 +41,17 @@ class App extends Component {
                 <NavSecondary />
               </div>
           }
+          <Switch>
             {this.props.authedUser ? 
+            <div>
               <Route path='/' exact component={HomePage} />
-            : <Route path='/' exact component={SignIn} />
+              <Route path='/questions/:question_id' component={Questions} />
+              <Route path='/add' component={NewQuestion} />
+              <Route path='/leaderboard' component={Leaderboard} />
+            </div> : <Route path='/' exact component={SignIn} />
             }
-            <Route path='/questions/:question_id' component={Questions} />
-            <Route path='/add' component={NewQuestion} />
-            <Route path='/leaderboard' component={Leaderboard} />
+            <Route component={NoMatch} />
+            </Switch>
           </div>
       </Router>
     )
