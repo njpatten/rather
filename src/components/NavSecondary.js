@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {  withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { setAuthedUser } from '../actions/authedUser'
@@ -9,6 +10,7 @@ class NavSecondary extends Component {
   logOut = () => {
     this.props.dispatch(setAuthedUser(null))
     localStorage.removeItem('loggedInUser');
+    this.props.history.push('/')
   }
 
   render() {
@@ -36,4 +38,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(NavSecondary)
+export default withRouter(connect(mapStateToProps)(NavSecondary));
