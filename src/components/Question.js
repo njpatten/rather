@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { withRouter } from "react-router";
 
 class Question extends Component {
   state= {
@@ -9,6 +10,7 @@ class Question extends Component {
   }
 
   componentDidMount = () => {
+
     if (this.props.showResults){
       if (this.props.optionOne.votes.includes(this.props.authedUser)){
         this.setState({
@@ -37,6 +39,7 @@ class Question extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+
     if (this.state.selectedAnswer != null){
       let selectedAnswer = this.state.selectedAnswer
       this.props.onAnswer(selectedAnswer);
@@ -49,9 +52,15 @@ class Question extends Component {
     return Math.round(optionVotes/totalVotes * 100)
   }
 
-  render() {
-    const { author, optionOne, optionTwo, id, showValues, showResults } = this.props
+  hasBeenAnswered = () => {
+    let { authedUser } = this.props;
+    if (this.props.optionOne.votes.includes(authedUser) || this.props.optionTwo.votes.includes(authedUser)){
+      return true
+    }
+  }
 
+  render() {
+    const { author, optionOne, optionTwo, id } = this.props
     return (
       <div style={{width: '500px'}}>
         <div style={{display: 'flex', background: '#f1f1f1', padding: '8px'}}>
@@ -61,7 +70,7 @@ class Question extends Component {
           <img src={this.props.users[author].avatarURL} className="image-avatar"/>
           <div style={{textAlign: 'left'}}>
             <h2 style={{marginTop: '0'}}>Would you rather:</h2>
-            {showValues ?
+            {this.props.location.pathname !== '/' && !this.hasBeenAnswered() ?
               <form onSubmit={this.handleSubmit}>
                 <div style={{display: 'flex'}}>
                   <input type="radio" id="optionOne" value="optionOne" name="question" onChange={this.handleChange} />
@@ -73,7 +82,7 @@ class Question extends Component {
                 </div>
                 <button>Submit</button>
               </form>
-            : showResults ?
+            : this.hasBeenAnswered() ?
             <div>
               <p>{optionOne.text} has {optionOne.votes.length} votes ({this.getPercent(optionOne.votes.length)}%)</p>
               <p>{optionTwo.text} has {optionTwo.votes.length} votes ({this.getPercent(optionTwo.votes.length)}%)</p>
@@ -102,4 +111,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Question)
+export default withRouter(connect(mapStateToProps)(Question));

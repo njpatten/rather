@@ -25,19 +25,25 @@ class Leaderboard extends Component {
 
   render() {
     const userObj = this.props.users
-    const  users = Object.keys(userObj);
+    let users = Object.values(userObj)
     console.log(users)
+    users.map(user => {
+      let leaderboard = user.questions.length + this.getAnswered(user.id)
+      user.leaderboard = leaderboard
+    })
+    users = users.sort((a, b) => b.leaderboard - a.leaderboard)
     return (
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <h1>Leaderboard</h1>
         {users && users.length ? 
           users.map(user => (
-          <div key={userObj[user].id} className='leader-wrap'>
-            <img src={userObj[user].avatarURL} style={{width: '50px', height: '50px', borderRadius: '100%'}} />
+          <div key={user.id} className='leader-wrap'>
+            <img src={user.avatarURL} style={{width: '50px', height: '50px', borderRadius: '100%'}} />
             <div className="leader-info">
-              <p>{userObj[user].name}</p>
-              <p>Has asked {userObj[user].questions.length} questions</p>
-              <p>Has answered {this.getAnswered(user)} questions</p>
+              <p>{user.name}</p>
+              <p>Has asked {user.questions.length} questions</p>
+              <p>Has answered {this.getAnswered(user.id)} questions</p>
+              <p>Total = {user.leaderboard}</p>
             </div>
           </div>
         ))

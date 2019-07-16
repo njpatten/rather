@@ -43,7 +43,7 @@ class NewQuestion extends Component {
             <label htmlFor="optionTwo">Option Two</label>
             <input id="optionTwo" name="optionTwo" type="text" value={this.state.optionTwo} onChange={this.handleChange}></input>
           </div>
-          <div class="form-wrap">
+          <div className="form-wrap">
             <button>Submit Question</button>
           </div>
         </form>
