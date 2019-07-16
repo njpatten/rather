@@ -11,6 +11,8 @@ To see who you are logged in as, see the avatar and name in the upper right hand
 
 See below for development information about Create React App.
 
+To develop the project, download the repo and npm install from the root directory. CD into the project directory and npm start.
+
 
 ## Available Scripts
 
