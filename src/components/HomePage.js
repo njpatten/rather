@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Question from './Question'
-import { handleInitialData } from '../actions/shared'
+import { _getQuestions } from '../utils/_DATA';
 
 class Homepage extends Component {
   state = {
@@ -10,8 +10,7 @@ class Homepage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.dispatch(handleInitialData())
-    console.log(this.props)
+    this.props.dispatch(_getQuestions)
   }
 
   getShownQuestions = () => {

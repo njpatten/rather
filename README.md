@@ -1,5 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+See below for information regarding Create React App.
+
+This project utilizes React and Redux to show a list of "Would you rather" questions.
+
+Upon opening the project, you can log in as one of three users. As this user you can answer questions, create new questions or see the leaderboard.
+
+To see who you are logged in as, see the avatar and name in the upper right hand side of the screen. There is a log out button in the same location.
+
+
+See below for development information about Create React App.
+
+
 ## Available Scripts
 
 In the project directory, you can run:

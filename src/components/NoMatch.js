@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Question from './Question'
-import { handleInitialData } from '../actions/shared'
-
 const Homepage = props => {
 
     return (
