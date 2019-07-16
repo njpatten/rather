@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import {  withRouter } from 'react-router-dom'
-import { bindActionCreators } from "redux";
-import { connect } from 'react-redux'
-
 import { setAuthedUser } from '../actions/authedUser'
+import { connect } from 'react-redux'
 
 
 class NavSecondary extends Component {
@@ -32,17 +30,6 @@ class NavSecondary extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators(
-      {
-        setAuthedUser
-      },
-      dispatch
-    )
-  };
-};
-
 function mapStateToProps(state) {
   return { 
     authedUser: state.authedUser,
@@ -50,4 +37,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavSecondary));
+export default withRouter(connect(mapStateToProps)(NavSecondary));

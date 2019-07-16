@@ -26,7 +26,6 @@ class Leaderboard extends Component {
   render() {
     const userObj = this.props.users
     let users = Object.values(userObj)
-    console.log(users)
     users.map(user => {
       let leaderboard = user.questions.length + this.getAnswered(user.id)
       user.leaderboard = leaderboard

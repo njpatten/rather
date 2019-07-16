@@ -88,7 +88,6 @@ class Question extends Component {
               <p>{optionTwo.text} has {optionTwo.votes.length} votes ({this.getPercent(optionTwo.votes.length)}%)</p>
               <hr />
               <p>Your answer: {this.state.selectedAnswerText}</p>
-              <Link to='/'><button>Back to Questions</button></Link>
             </div>
             : <div>
               <p>{optionOne.text} or...</p> 
