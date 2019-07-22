@@ -29,6 +29,7 @@ class Leaderboard extends Component {
     users.map(user => {
       let leaderboard = user.questions.length + this.getAnswered(user.id)
       user.leaderboard = leaderboard
+      return user;
     })
     users = users.sort((a, b) => b.leaderboard - a.leaderboard)
     return (
@@ -37,7 +38,7 @@ class Leaderboard extends Component {
         {users && users.length ? 
           users.map(user => (
           <div key={user.id} className='leader-wrap'>
-            <img src={user.avatarURL} style={{width: '50px', height: '50px', borderRadius: '100%'}} />
+            <img src={user.avatarURL} style={{width: '50px', height: '50px', borderRadius: '100%'}} alt="img" />
             <div className="leader-info">
               <p>{user.name}</p>
               <p>Has asked {user.questions.length} questions</p>

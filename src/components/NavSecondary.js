@@ -20,7 +20,7 @@ class NavSecondary extends Component {
       <div>
         {authedUserObj ? 
           <ul className="nav-secondary">
-            <li><img src={authedUserObj.avatarURL} className="nav-avatar"/></li>
+            <li><img src={authedUserObj.avatarURL} className="nav-avatar" alt="nav-avatar"/></li>
             <li>Logged in as {authedUser}</li>
             <li style={{cursor: 'pointer'}} onClick={this.logOut}>Log Out</li>
           </ul>

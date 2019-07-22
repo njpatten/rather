@@ -67,7 +67,7 @@ class Question extends Component {
           {author} asks:
         </div>
         <div style={{display: 'flex', alignItems: 'center', margin: '20px'}}>
-          <img src={this.props.users[author].avatarURL} className="image-avatar"/>
+          <img src={this.props.users[author].avatarURL} className="image-avatar" alt="img"/>
           <div style={{textAlign: 'left'}}>
             <h2 style={{marginTop: '0'}}>Would you rather:</h2>
             {this.props.location.pathname !== '/' && !this.hasBeenAnswered() ?
