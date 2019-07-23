@@ -27,6 +27,10 @@ class Questions extends Component {
     })
   }
 
+  componentDidMount = () => {
+    _getQuestions().then(questions => console.log(questions))
+  }
+
   render() {
     let questionId = this.props.match.params.question_id
     let question = this.props.questions[questionId]

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Question from './Question'
-import { _getQuestions } from '../utils/_DATA';
+import { handleLoadData } from '../actions/shared'
 
 class Homepage extends Component {
   state = {
@@ -10,16 +10,19 @@ class Homepage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.dispatch(_getQuestions)
+    this.props.dispatch(handleLoadData())
   }
 
+
   getShownQuestions = () => {
+
     let questionObj = this.props.questions;
     let questions = Object.keys(questionObj).map(key => questionObj[key])
 
     let shownQuestions = [];
 
     if (this.state.answered) {
+      console.log(questions)
       questions.forEach(question => {
         if (question.optionOne.votes.includes(this.props.authedUser) || question.optionTwo.votes.includes(this.props.authedUser)){
           shownQuestions.push(question);

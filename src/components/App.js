@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { handleInitialData } from '../actions/shared'
+import { handleLoadData } from '../actions/shared'
 
 import Nav from './Nav'
 import HomePage from './HomePage'
@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   componentDidMount () {
-    this.props.dispatch(handleInitialData())
+    this.props.dispatch(handleLoadData())
 
     window.logout = () => this.props.dispatch(setAuthedUser(null))
     var loggedInUser = localStorage.getItem('loggedInUser')

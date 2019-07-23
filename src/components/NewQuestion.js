@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { _saveQuestion } from '../utils/_DATA.js'
+import { _saveQuestion, _getQuestions } from '../utils/_DATA.js'
 
 class NewQuestion extends Component {
   state={
@@ -17,9 +17,10 @@ class NewQuestion extends Component {
       author: this.props.authedUser,
     }
     _saveQuestion(question).then(data => {
-      console.log(data)},
+      console.log(data)}
+    ).then(() => {
       this.props.history.push('/')
-    ).catch(() => console.log('no'))
+    }).catch(() => console.log('no'))
   }
 
   handleChange = event => {
